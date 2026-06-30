@@ -20,15 +20,15 @@
 ---
 ## 🎥 End-to-End Invoice Processing Demo
 
-This demo showcases the complete workflow of the **Invoice Data Extraction System**, from uploading an invoice to generating validated, structured JSON output. It demonstrates the application's AI-powered extraction pipeline, including document processing, data extraction, financial validation, and the final results presented through the interactive web interface.
+This demo showcases the complete workflow of the **InvoiceIQ** system—from uploading an invoice to generating validated, structured JSON output. It demonstrates the complete AI-powered extraction pipeline, including document preprocessing, intelligent data extraction, financial validation, and structured JSON generation through the interactive web interface.
 
-**Demo Video:** `Video/demo.mp4`
+**🎬 Demo Video:** [Watch the End-to-End Demo](https://drive.google.com/file/d/1AdP3SXEDaXUXxoepi7daDLrcUwB3J1Qm/view?usp=sharing)
 
 ### Modular Project Architecture
 
 The application is built using a modular Python architecture where each component is responsible for a specific stage of the invoice processing pipeline—from preprocessing and OCR to AI extraction, GST calculation, validation, and caching.
 
-![Project Structure](Video/Screenshot%202026-06-30%20125808.png)
+![Project Structure](assets/Screenshot%202026-06-30%20125808.png)
 
 *Core modules include `app_web.py`, `model_client.py`, `preprocessing.py`, `pdf_utils.py`, `gst_calculator.py`, `gst_enrichment.py`, `free_item_splitter.py`, `cache_manager.py`, and `schema.py`, providing a clean and maintainable codebase.*
 
