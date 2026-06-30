@@ -22,7 +22,7 @@
 
 This demo showcases the complete workflow of the **Invoice Data Extraction System**, from uploading an invoice to generating validated, structured JSON output. It demonstrates the application's AI-powered extraction pipeline, including document processing, data extraction, financial validation, and the final results presented through the interactive web interface.
 
-▶️ **[Watch the Demo](Video/demo.mp4)**
+**Demo Video:** `Video/demo.mp4`
 
 ### Modular Project Architecture
 
