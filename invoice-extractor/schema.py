@@ -368,6 +368,20 @@ USER_PROMPT = (
     '  • Merge continuation rows across pages\n'
     '  • Remove ghost/duplicate rows from replica pages\n'
     '  • Extract data only once per item\n\n'
+
+    '  ═══════════════════════ COLUMN ALIGNMENT RULE (VERY IMPORTANT) ═══════════════════════\n'
+    '  NEVER confuse adjacent columns.\n'
+    '  Read the table header first and map each value to its correct column.\n'
+    '  Example:\n'
+    '    PCode = AL-01-2350\n'
+    '    Pack  = 10 S\n'
+    '    CORRECT:   item_code = AL-01-2350,  Pack = 10 S\n'
+    '    INCORRECT: Pack = AL-01-2350\n'
+    '  Rule: Extract values from the column DIRECTLY UNDER the matching header,\n'
+    '  even if OCR spacing is poor. Do NOT shift values left or right.\n'
+    '  If unsure which column a value belongs to, use the header label as the\n'
+    '  single source of truth — not visual position alone.\n'
+    '  ══════════════════════════════════════════════════════════════════════\n\n'
     
     '  ITEM FIELD ORDER (MANDATORY - DO NOT CHANGE):\n\n'
     
@@ -804,6 +818,9 @@ USER_PROMPT = (
     '• Discount = extract from discount columns only\n'
     '• Value ≠ taxable_value (different fields)\n'
     '• total_price = copy from AMOUNT column (not TAXABLE AMT)\n'
+    '• COLUMN ALIGNMENT: Always read table header first; map each value to the column\n'
+    '  DIRECTLY UNDER its header. Never shift values between adjacent columns.\n'
+    '  Example: PCode=AL-01-2350, Pack=10 S → item_code="AL-01-2350", Pack="10 S" (not swapped)\n'
 )
 
 
@@ -1003,6 +1020,21 @@ def get_items_prompt() -> tuple[str, str]:
         "- Copy Batch exactly as shown (replace <>$#@&| with -, preserve /)\n"
         "- Rates are PERCENTAGES, amounts are MONETARY VALUES\n"
         "- Skip ghost rows (no description, quantity, price)\n"
+        "\n"
+        "═══════════════════════ COLUMN ALIGNMENT RULE (VERY IMPORTANT) ═══════════════════════\n"
+        "NEVER confuse adjacent columns. Read the table header first and map each value\n"
+        "to its correct column based on the header directly above it.\n"
+        "Example:\n"
+        "  PCode = AL-01-2350\n"
+        "  Pack  = 10 S\n"
+        "  CORRECT:   item_code = AL-01-2350,  Pack = 10 S\n"
+        "  INCORRECT: Pack = AL-01-2350\n"
+        "Rule: Extract values from the column DIRECTLY UNDER the matching header,\n"
+        "even if OCR spacing is poor. Do NOT shift values left or right.\n"
+        "If unsure which column a value belongs to, use the header label as the\n"
+        "single source of truth — not the visual position alone.\n"
+        "══════════════════════════════════════════════════════════════════════\n"
+        "\n"
         "- Merge continuation rows across pages\n"
         "- expiry_date: always DD-MM-YYYY (e.g., '30-11-2030'); '11/30' → '30-11-2030'\n"
         "- total_price: copy from AMOUNT column EXACTLY, NEVER calculate\n"
