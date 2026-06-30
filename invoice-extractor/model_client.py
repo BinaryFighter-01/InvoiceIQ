@@ -170,6 +170,10 @@ class OpenRouterClient:
             ],
             'temperature': temperature,
             'max_tokens': max_tokens,
+            # Disable chain-of-thought thinking for Qwen3 and similar models.
+            # These passes are pure OCR copy tasks — reasoning wastes tokens and
+            # causes "No JSON found" errors when the budget runs out mid-think.
+            'thinking': {'type': 'disabled'},
         }
         
         # Make request with retry logic
@@ -280,6 +284,11 @@ class OpenRouterClient:
                 try:
                     # Clean response - remove markdown fences if present
                     text_response = text_response.strip()
+                    
+                    # Strip <think>...</think> blocks emitted by Qwen3 and similar
+                    # reasoning models before the actual JSON output
+                    import re as _re
+                    text_response = _re.sub(r'<think>.*?</think>', '', text_response, flags=_re.DOTALL).strip()
                     
                     # Remove markdown code fences (```json ... ``` or ``` ... ```)
                     if text_response.startswith('```'):
@@ -419,7 +428,7 @@ class OpenRouterClient:
             header_system,
             header_user,
             temperature=temperature,
-            max_tokens=500
+            max_tokens=1000
         )
         
         if 'error' in header_data:
@@ -445,7 +454,7 @@ class OpenRouterClient:
             totals_system,
             totals_user,
             temperature=temperature,
-            max_tokens=300
+            max_tokens=1000
         )
         
         if 'error' in totals_data:
@@ -594,7 +603,7 @@ class OpenRouterClient:
             header_system,
             header_user,
             temperature=temperature,
-            max_tokens=500
+            max_tokens=1000
         )
         
         if 'error' in header_data:
@@ -620,7 +629,7 @@ class OpenRouterClient:
             totals_system,
             totals_user,
             temperature=temperature,
-            max_tokens=300
+            max_tokens=1000
         )
         
         if 'error' in totals_data:
