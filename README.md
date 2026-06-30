@@ -28,7 +28,7 @@ This demo showcases the complete workflow of the **Invoice Data Extraction Syste
 
 The application is built using a modular Python architecture where each component is responsible for a specific stage of the invoice processing pipeline—from preprocessing and OCR to AI extraction, GST calculation, validation, and caching.
 
-![Project Structure](Screenshots/Screenshot%202026-06-30%20125808.png)
+![Project Structure](Video/Screenshot%202026-06-30%20125808.png)
 
 *Core modules include `app_web.py`, `model_client.py`, `preprocessing.py`, `pdf_utils.py`, `gst_calculator.py`, `gst_enrichment.py`, `free_item_splitter.py`, `cache_manager.py`, and `schema.py`, providing a clean and maintainable codebase.*
 
